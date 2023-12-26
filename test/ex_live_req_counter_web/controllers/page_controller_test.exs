@@ -3,6 +3,12 @@ defmodule ExLiveReqCounterWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Peace of mind from prototype to production"
+    assert html_response(conn, 200) =~ "Number of tracked counts"
+  end
+
+  test "GET /new", %{conn: conn} do
+    conn = get(conn, ~p"/new")
+
+    assert redirected_to(conn) =~ "/counts"
   end
 end

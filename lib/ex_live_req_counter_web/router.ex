@@ -33,6 +33,7 @@ defmodule ExLiveReqCounterWeb.Router do
     end
   end
 
+  # meh key validation
   defp key_check(conn, _opts) do
     with %{"key" => key} <- conn.params,
          false <- key |> ExLiveReqCounter.Cache.get() |> is_nil do

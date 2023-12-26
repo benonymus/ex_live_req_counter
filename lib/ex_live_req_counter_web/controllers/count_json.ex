@@ -1,5 +1,5 @@
 defmodule ExLiveReqCounterWeb.CountJSON do
   def incr(%{count: count}) do
-    %{count: count}
+    %{data: %{count: count}}
   end
 end
