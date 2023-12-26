@@ -1,0 +1,18 @@
+<.back navigate={~p"/"}>Home</.back>
+
+<.header>
+  Count for <%= @key %>: <%= @count %>
+  <:subtitle>
+    Use this
+    <.link
+      class="text-blue-600 dark:text-blue-500 hover:underline"
+      target="_blank"
+      patch={~p"/api/counts/#{@key}"}
+    >
+      link
+    </.link>
+    to increase the count!
+  </:subtitle>
+</.header>
+
+<.button class="mt-4" phx-click="reset_count">Reset</.button>

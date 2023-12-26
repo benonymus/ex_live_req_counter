@@ -18,11 +18,37 @@ defmodule ExLiveReqCounterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/new", PageController, :new
+
+    pipe_through :key_check
+    live "/counts/:key", CountLive.Show, :show
   end
 
   scope "/api", ExLiveReqCounterWeb do
     pipe_through :api
-    get "/:id", RequestController, :show
+
+    scope "/counts" do
+      pipe_through :key_check
+      get "/:key", CountController, :incr
+    end
+  end
+
+  defp key_check(conn, _opts) do
+    with %{"key" => key} <- conn.params,
+         false <- key |> ExLiveReqCounter.Cache.get() |> is_nil do
+      conn
+    else
+      %{} ->
+        conn
+
+      true ->
+        conn
+        |> fetch_session()
+        |> fetch_flash()
+        |> put_flash(:error, "Key does not exist!")
+        |> redirect(to: "/")
+        |> halt()
+    end
   end
 
   # Enable LiveDashboard in development

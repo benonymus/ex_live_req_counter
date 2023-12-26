@@ -11,7 +11,7 @@ config :ex_live_req_counter,
   generators: [timestamp_type: :utc_datetime]
 
 config :ex_live_req_counter, ExLiveReqCounter.Cache,
-  gc_interval: :timer.hours(1),
+  gc_interval: :timer.minutes(30),
   # Max 30 mb of memory
   allocated_memory: 30_000_000,
   # GC min timeout: 10 sec

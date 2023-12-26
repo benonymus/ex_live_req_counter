@@ -45,7 +45,8 @@ defmodule ExLiveReqCounter.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, ">= 0.0.0"},
-      {:nebulex, "~> 2.5"}
+      {:nebulex, "~> 2.5"},
+      {:nanoid, "~> 2.1.0"}
     ]
   end
 
