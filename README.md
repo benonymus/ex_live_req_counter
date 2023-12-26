@@ -5,4 +5,4 @@ Hence I created this project.
 
 You can create a new key and send your requests to the corresponding api link to increase the request count. The liveview page will track you the requests in real time.
 
-It is deployed here: ()[]
+It is deployed here: (https://ex-live-req-counter.fly.dev)[https://ex-live-req-counter.fly.dev]
