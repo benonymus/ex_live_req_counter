@@ -33,24 +33,22 @@ defmodule ExLiveReqCounterWeb.Router do
     end
   end
 
-  # meh key validation
-  defp key_check(conn, _opts) do
-    with %{"key" => key} <- conn.params,
-         false <- key |> ExLiveReqCounter.Cache.get() |> is_nil do
-      conn
-    else
-      %{} ->
-        conn
-
-      true ->
+  defp key_check(%{params: %{"key" => key}} = conn, _opts) do
+    case ExLiveReqCounter.Cache.get(key) do
+      nil ->
         conn
         |> fetch_session()
         |> fetch_flash()
         |> put_flash(:error, "Key does not exist!")
         |> redirect(to: "/")
         |> halt()
+
+      _ ->
+        conn
     end
   end
+
+  defp key_check(conn, _opts), do: conn
 
   # Enable LiveDashboard in development
   if Application.compile_env(:ex_live_req_counter, :dev_routes) do
